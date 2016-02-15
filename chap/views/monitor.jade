@@ -1,0 +1,36 @@
+extends layout
+
+block content
+	h1 #{school} Campus Active Trips
+	
+	div(name="notice")
+	
+	div(name="map")
+		p map goes here
+		
+	div(name="filter")
+		div
+			p Filter active trips:
+		div
+			input(type="text")
+	
+	div(name="table")
+		table
+			tr
+				th Name
+				th Phone
+				th Origin
+				th Destination
+				th Start Time
+				th Expected Arrival
+				th Status				
+			tr
+				td George H.
+				td (414) 305-7713
+				td Spangler
+				td SFP 6
+				td 7:03 PM
+				td 7:18 PM
+				td Normal
+			
+			

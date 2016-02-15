@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	h1 En Route
+	
+	div(name="notice")
+	
+	p #{name}, we're here for you.
+	
+	p Your walk is being monitored by #{school}'s Campus Security
+	
+	div(name="status")
+		p You're about #{mins} minutes away from your destination
+		
+		p (#{miles} miles to go)
+
+	div
+		form
+			p
+				input(type="submit", name="drone", value="Request a Drone Escort", formaction="")
+			p
+				input(type="submit", name="help", value="Call for Help", formaction="")
+			p
+				input(type="submit", name="cancel", value="Cancel / End Trip", formaction="")

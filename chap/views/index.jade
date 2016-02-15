@@ -1,5 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	
+	p Welcome to #{title}
+	
+	p #{title} gives you the confidence to walk home safely on and around campus
+	
+	form(id='startTrip', action='/start', method='POST')
+		p What's your name?
+		p
+			input(type='text', name='name', placeholder='e.g. Sarah')		
+		p How can we reach you (optional)?
+		p
+			input(type='text', name='phone', placeholder='Enter your phone number')		
+		p Where are you headed?
+		p
+			input(type='text', name='destination', placeholder='Enter an address')
+		p
+			input(type='submit', name='go', value='Go')
+	
