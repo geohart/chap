@@ -1,22 +1,30 @@
 extends layout
 
+block scripts
+	script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9NksVJ-3AzFhEoekDx_DGyXZ3aita-Wc&libraries=places")
+	script(type="text/javascript", src="../javascripts/address.js")
 block content
 	h1= title
 	
-	p Welcome to #{title}
+	p Welcome to #{title}!
 	
-	p #{title} gives you the confidence to walk home safely on and around campus
+	p Walk home safely on and around campus
 	
 	form(id='startTrip', action='/start', method='POST')
-		p What's your name?
-		p
-			input(type='text', name='name', placeholder='e.g. Sarah')		
-		p How can we reach you (optional)?
-		p
-			input(type='text', name='phone', placeholder='Enter your phone number')		
-		p Where are you headed?
-		p
-			input(type='text', name='destination', placeholder='Enter an address')
-		p
-			input(type='submit', name='go', value='Go')
+		div(class='form-group')
+			label(for='name') What's your name?
+			input(type='text', id="name", class='form-control', name='name', placeholder='e.g. Sarah')		
+		div(class='form-group')
+			label(for='phone') How can we reach you (optional)?
+			input(type='text', id="phone", class='form-control', name='phone', placeholder='Enter your phone number')		
+		div(class='form-group')
+			label(for='address') Where are you headed?
+			input(type='text', id='address', class='form-control', name='destination', placeholder='Enter an address')
+			input(id='lat', type='hidden', name='lat')
+			input(id='lon', type='hidden', name='lon')
+			input(id='destlat', type='hidden', name='destlat')
+			input(id='destlon', type='hidden', name='destlon')
+		button(class='btn btn-primary btn-block', type='submit', name='go') Let's Go
+	div(id='details')
+			
 	

@@ -16,7 +16,8 @@ db.once('open', function() {
   // define schemas and compile into models:
   // community
   var communitySchema = mongoose.Schema({
-	    name: String
+		name: String
+	  , phone: String
   });
   var Community = mongoose.model('community', communitySchema);
   

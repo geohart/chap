@@ -1,11 +1,11 @@
 extends layout
 
 block content
-	h1 En Route
+	h1 We're here for you!
 	
 	div(name="notice")
 	
-	p #{name}, we're here for you.
+	p #{name}, you're on your way!
 	
 	p Your walk is being monitored by #{school}'s Campus Security
 	
@@ -15,10 +15,12 @@ block content
 		p (#{miles} miles to go)
 
 	div
+		form(id='getDrone', action='/getDrone', method='POST')
+			div(class='form-group')
+				button(type="submit", class="btn btn-default btn-block", name="drone", formaction="") Request a Drone Escort
+		form(id='endTrip', action='/end/#{tripId}', method='POST')
+			div(class='form-group')
+				button(type="submit", class="btn btn-default btn-block", name="help") Cancel / End Trip
 		form
-			p
-				input(type="submit", name="drone", value="Request a Drone Escort", formaction="")
-			p
-				input(type="submit", name="help", value="Call for Help", formaction="")
-			p
-				input(type="submit", name="cancel", value="Cancel / End Trip", formaction="")
+			div(class='form-group')
+				a(href="tel:#{phone}", class="btn btn-danger btn-block") Call for Help
