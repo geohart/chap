@@ -27,7 +27,11 @@ router.get('/trip/:id', function(req, res, next) {
 				, school: community.name
 				, phone: community.phone
 				, miles: 0.5
-				, mins: 12 });			
+				, mins: 12
+				, originLat: trip.origin.lat
+				, originLon: trip.origin.lon
+				, destinLat: trip.dest.lat
+				, destinLon: trip.dest.lon});			
 		});		
 	});
 });
