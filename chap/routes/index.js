@@ -54,44 +54,55 @@ router.post('/start', function(req, res, next){
 	// get the destination position
 	var destin = new model.Position({lat : req.body.destlat, lon : req.body.destlon, time : startTime + tripDuration});
 	
-	// create new user
-	var user = new model.Person({
-		  name: 	req.body.name
-		, phone:	req.body.phone 
-		, comm_id:	'56c1306ed0531478247513ef'
-	});
+	// create new community 
+	// TODO: allow user to select their community from a drop down
+	var comm = new model.Community({
+		  name: 'Harvard Business School'
+		, phone: '555-555-5555'
+	})
 	
-	user.save(function(err, user){
-		console.log('here comes origin');
-		console.log(origin);
+	comm.save(function(err, comm){
+		
 		if (err) return console.error(err);
 		
-		// output user to console
-		console.log(user);
-		
-		// create a new trip
-		var trip = new model.Trip({
-			  user		: user
-			, startTime : startTime
-			, duration 	: tripDuration
-			, origin 	: origin
-			, dest		: destin
-			, destName 	: req.body.destination
-			, status 	: 0
-			, complete 	: 0
-			, waypoints : [origin]
+		// create new user
+		var user = new model.Person({
+			  name: 	req.body.name
+			, phone:	req.body.phone 
+			, comm_id:	comm._id
 		});
 		
-		trip.save(function(err, trip){
-			
-			if (err) return console.error(err);
+		user.save(function(err, user){
 		
-			// output trip to console
-			console.log(trip);
+			if (err) return console.error(err);
 			
-			// send to trip view
-			res.redirect('/trip/' + trip._id);
+			// output user to console
+			console.log(user);
 			
+			// create a new trip
+			var trip = new model.Trip({
+				  user		: user
+				, startTime : startTime
+				, duration 	: tripDuration
+				, origin 	: origin
+				, dest		: destin
+				, destName 	: req.body.destination
+				, status 	: 0
+				, complete 	: 0
+				, waypoints : [origin]
+			});
+			
+			trip.save(function(err, trip){
+				
+				if (err) return console.error(err);
+			
+				// output trip to console
+				console.log(trip);
+				
+				// send to trip view
+				res.redirect('/trip/' + trip._id);
+				
+			});
 		});
 	});
 });
@@ -99,15 +110,11 @@ router.post('/start', function(req, res, next){
 /* POST end trip */
 router.post('/end/:id', function(req, res, next){
 	
-	console.log('herrro1');
 	console.log(req.body);
 	
 	// look up trip
 	var trip = model.Trip.findOne({'_id': req.params.id}, function(err, trip){
 		if (err) return console.error(err);
-		
-		console.log('herrro2');
-		console.log(trip);
 		
 		// update trip status
 		trip.complete = 1;
@@ -117,7 +124,6 @@ router.post('/end/:id', function(req, res, next){
 			
 			if (err) return console.error(err);
 			
-			console.log('herrro3');
 			// send to index view
 			res.redirect('/');
 			
